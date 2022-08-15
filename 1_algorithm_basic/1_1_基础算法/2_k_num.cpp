@@ -1,3 +1,4 @@
+// 第k个数
 #include <iostream>
 
 using namespace std;
@@ -6,9 +7,9 @@ const int N = 100010;
 
 int q[N];
 
-void quick_sort(int q[], int l, int r)
+int quick_sort(int q[], int l, int r, int k)
 {
-    if (l >= r) return;
+    if (l >= r) return q[l];
 
     int i = l - 1, j = r + 1, x = q[l + r >> 1];
     while (i < j)
@@ -18,20 +19,18 @@ void quick_sort(int q[], int l, int r)
         if (i < j) swap(q[i], q[j]);
     }
 
-    quick_sort(q, l, j);
-    quick_sort(q, j + 1, r);
+    if (j - l + 1 >= k) return quick_sort(q, l, j, k);
+    else return quick_sort(q, j + 1, r, k - (j - l + 1));
 }
 
 int main()
 {
-    int n;
-    scanf("%d", &n);
+    int n, k;
+    scanf("%d%d", &n, &k);
 
     for (int i = 0; i < n; i ++ ) scanf("%d", &q[i]);
 
-    quick_sort(q, 0, n - 1);
-
-    for (int i = 0; i < n; i ++ ) printf("%d ", q[i]);
+    cout << quick_sort(q, 0, n - 1, k) << endl;
 
     return 0;
 }
