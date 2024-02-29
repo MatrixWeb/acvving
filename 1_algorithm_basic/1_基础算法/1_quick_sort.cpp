@@ -10,7 +10,7 @@ int q[N];
 void quick_sort(int q[], int l, int r)
 {
     if (l >= r) return;
-
+    // 左边<= x， 右边 >= x
     int i = l - 1, j = r + 1, x = q[l + r >> 1];
     while (i < j)
     {
