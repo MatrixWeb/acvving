@@ -8,10 +8,12 @@ typedef pair<int, int> PII;
 
 void merge(vector<PII> &segs) {
     vector<PII> res;
+    // 优先左端点，再按右端点
     sort(segs.begin(), segs.end());
     int st = -2e9, ed = -2e9;
     for (auto seg :segs) {
         if (ed < seg.first) {
+            // 没有交集的情况
             if (st != -2e9) res.push_back({st, ed});
             st = seg.first, ed = seg.second;
         } else {
